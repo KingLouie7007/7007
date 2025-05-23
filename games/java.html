@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Click the Button Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f2f2f2;
+        }
+
+        .game-container {
+            text-align: center;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        button {
+            padding: 20px 30px;
+            font-size: 20px;
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .game-info {
+            font-size: 18px;
+        }
+
+        .timer {
+            font-size: 24px;
+            color: #ff6347;
+        }
+
+        .score {
+            font-size: 30px;
+            font-weight: bold;
+            color: #4CAF50;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="game-container">
+    <h1>Click the Button Game</h1>
+    <p class="game-info">Click the button as many times as you can within 10 seconds!</p>
+    <button id="clickButton">Click Me!</button>
+    <p class="timer" id="timer">Time Left: 10</p>
+    <p class="score" id="score">Score: 0</p>
+</div>
+
+<script>
+    let score = 0;
+    let timeLeft = 10;
+    let timerInterval;
+    
+    const clickButton = document.getElementById("clickButton");
+    const timerDisplay = document.getElementById("timer");
+    const scoreDisplay = document.getElementById("score");
+
+    // Function to update the timer
+    function startTimer() {
+        timerInterval = setInterval(function() {
+            timeLeft--;
+            timerDisplay.textContent = `Time Left: ${timeLeft}`;
+            if (timeLeft <= 0) {
+                clearInterval(timerInterval);
+                clickButton.disabled = true;
+                alert("Time's up! Your score is " + score);
+            }
+        }, 1000);
+    }
+
+    // Function to handle button clicks
+    clickButton.addEventListener("click", function() {
+        if (timeLeft > 0) {
+            score++;
+            scoreDisplay.textContent = `Score: ${score}`;
+        }
+    });
+
+    // Start the game
+    startTimer();
+</script>
+
+</body>
+</html>
